@@ -57,3 +57,13 @@ bool AMovingEnemyTank::InFireRange()
 
 	return false;
 }
+
+void AMovingEnemyTank::Move(float Value)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Value: %f"), Value);
+
+	// X = Value * Speed * DeltaTime
+	FVector DeltaLocation = FVector::ZeroVector;
+	DeltaLocation.X = Value * Speed * UGameplayStatics::GetWorldDeltaSeconds(this);
+	AddActorLocalOffset(DeltaLocation, true);
+}
