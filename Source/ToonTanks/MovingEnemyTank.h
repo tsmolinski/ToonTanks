@@ -17,6 +17,9 @@ class TOONTANKS_API AMovingEnemyTank : public ABasePawn
 public:
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+	void SetSpeed(float value);
+
 	void HandleDestruction();
 
 protected:
@@ -30,7 +33,7 @@ private:
 	float FireRange = 300.f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float Speed = 200.f;
+	float Speed = 350.f;
 
 	FTimerHandle FireRateTimerHandle;
 	float FireRate = 2.f;

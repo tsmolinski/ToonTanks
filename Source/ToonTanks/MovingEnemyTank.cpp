@@ -16,6 +16,11 @@ void AMovingEnemyTank::Tick(float DeltaTime)
 	}
 }
 
+void AMovingEnemyTank::SetSpeed(float value)
+{
+	Speed = value;
+}
+
 void AMovingEnemyTank::HandleDestruction()
 {
 	Super::HandleDestruction();
