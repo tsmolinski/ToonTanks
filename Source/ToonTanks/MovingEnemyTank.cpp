@@ -16,6 +16,14 @@ void AMovingEnemyTank::Tick(float DeltaTime)
 	}
 }
 
+void AMovingEnemyTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AMovingEnemyTank::Move);
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &AMovingEnemyTank::Turn);
+}
+
 void AMovingEnemyTank::SetSpeed(float value)
 {
 	Speed = value;
@@ -71,4 +79,12 @@ void AMovingEnemyTank::Move(float Value)
 	FVector DeltaLocation = FVector::ZeroVector;
 	DeltaLocation.X = Value * Speed * UGameplayStatics::GetWorldDeltaSeconds(this);
 	AddActorLocalOffset(DeltaLocation, true);
+}
+
+void AMovingEnemyTank::Turn(float Value)
+{
+	FRotator DeltaRotation = FRotator::ZeroRotator;
+	// Yaw = Value * TurnRate * DeltaTime
+	DeltaRotation.Yaw = Value * TurnRate * UGameplayStatics::GetWorldDeltaSeconds(this);
+	AddActorLocalRotation(DeltaRotation, true);
 }
